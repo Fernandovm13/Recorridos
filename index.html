@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="graph-container" class="graph-container"></div>
+    
+    <div>
+        <h3>Agregar Vértice</h3>
+        <input type="text" id="vertex-input" placeholder="Nombre del vértice">
+        <button id="add-vertex-button">Agregar Vértice</button>
+    </div>
+    
+    <div>
+        <h3>Agregar Arista</h3>
+        <input type="text" id="edge-start-input" placeholder="Vértice de inicio">
+        <input type="text" id="edge-end-input" placeholder="Vértice de fin">
+        <button id="add-edge-button">Agregar Arista</button>
+    </div>
+    
+    <div>
+        <h3>Recorridos</h3>
+        <button id="bfs-button">BFS</button>
+        <button id="dfs-button">DFS</button>
+    </div>
+
+    <div>
+        <h3>Algoritmo de Dijkstra</h3>
+        <input type="text" id="dijkstra-start-input" placeholder="Vértice de inicio">
+        <input type="text" id="dijkstra-end-input" placeholder="Vértice de fin">
+        <button id="dijkstra-button">Encontrar Ruta Más Corta</button>
+    </div>
+    
+    <div id="steps" class="info-container"></div>
+    
+    <div id="messages"></div>
+
+    <script type="module" src="./src/controllers/script.mjs"></script>
+</body>
+</html>

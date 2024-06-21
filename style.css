@@ -1,0 +1,211 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.graph-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px -10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.vertex {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.vertex.bfs {
+    background-color: #2196F3;
+}
+
+.vertex.dfs {
+    background-color: #FF5722;
+}
+
+.vertex.highlight {
+    animation: highlight 1s ease-in-out;
+}
+
+@keyframes highlight {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.message-container {
+    margin-top: 20px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.message.success {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.message.error {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.message.info {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+/* Estilos para los contenedores de información y botones */
+.info-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-container h3 {
+    margin-bottom: 10px;
+}
+
+.info-container input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.info-container button {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-container button:hover {
+    background-color: #555;
+}
+
+/* Estilos para el mapa visual del grafo */
+.map-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.map {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.node {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    z-index: 1; /* Asegura que los nodos estén sobre las flechas */
+}
+
+.arrow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform-origin: center;
+    pointer-events: none;
+    z-index: 0; /* Asegura que las flechas estén detrás de los nodos */
+}
+
+.arrow.bfs {
+    color: #2196F3;
+}
+
+.arrow.dfs {
+    color: #FF5722;
+}
+
+/* Estilos para el algoritmo de Dijkstra */
+.dijkstra-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dijkstra-container h3 {
+    margin-bottom: 10px;
+}
+
+.dijkstra-container input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.dijkstra-container button {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dijkstra-container button:hover {
+    background-color: #555;
+}
