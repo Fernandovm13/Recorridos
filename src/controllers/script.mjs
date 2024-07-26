@@ -6,18 +6,20 @@ g.addVertices("A", "B", "C", "D", "E", "F", "G");
 g.addV("H");
 g.addV("I");
 
-g.addConexion("A", "B");
-g.addConexion("A", "C");
+g.addConexion("A", "B", 6);
+g.addConexion("A", "C", 7);
 g.addConexion("A", "D", 8);
 g.addConexion("B", "E", 9);
 g.addConexion("B", "F", 10);
 g.addConexion("D", "F", 11);
 g.addConexion("E", "G", 12);
-g.addConexion("G", "H");
-g.addConexion("G", "I");
+g.addConexion("G", "H", 13);
+g.addConexion("G", "I", 14);
 
+// Crear instancia de la vista del grafo
 const view = new GraphView('graph-container');
 
+// Definir los callbacks para BFS y DFS
 const bfsCallback = (val) => {
     view.displayVertex(val, 'bfs');
 };
@@ -43,17 +45,19 @@ document.getElementById('add-vertex-button').addEventListener('click', () => {
 document.getElementById('add-edge-button').addEventListener('click', () => {
     const start = document.getElementById('edge-start-input').value.trim();
     const end = document.getElementById('edge-end-input').value.trim();
+    const weight = parseInt(document.getElementById('edge-weight-input').value.trim(), 10) || 1;
     if (start && end) {
-        const success = g.addConexion(start, end);
+        const success = g.addConexion(start, end, weight);
         if (success) {
-            view.displayMessage(`Arista de ${start} a ${end} agregada.`, 'success');
+            view.displayMessage(`Arista de ${start} a ${end} con peso ${weight} agregada.`, 'success');
             document.getElementById('edge-start-input').value = '';
             document.getElementById('edge-end-input').value = '';
+            document.getElementById('edge-weight-input').value = '';
         } else {
-            view.displayMessage('Arista no válida. Verifique los vértices.', 'error');
+            view.displayMessage('Vértice no válido. Verifique los vértices.', 'error');
         }
     } else {
-        view.displayMessage('Por favor, ingrese vértices válidos.', 'error');
+        view.displayMessage('Por favor, ingrese vértices y peso válidos.', 'error');
     }
     updateGraphView();
 });
@@ -77,14 +81,6 @@ document.getElementById('dfs-button').addEventListener('click', () => {
     }
 });
 
-function updateGraphView() {
-    view.clear();
-    const vertices = g.getVertices();
-    for (let vertex of vertices) {
-        view.displayVertex(vertex);
-    }
-}
-
 // Agregar evento para ejecutar Dijkstra
 document.getElementById('dijkstra-button').addEventListener('click', async () => {
     const startVertex = document.getElementById('dijkstra-start-input').value.trim();
@@ -97,11 +93,39 @@ document.getElementById('dijkstra-button').addEventListener('click', async () =>
             updateSteps(previous, endVertex);
         });
 
-        view.displayMessage(`Ruta más corta desde ${startVertex} hasta ${endVertex}: ${getShortestPath(previous, endVertex)}`, 'info');
+        view.displayMessage(`Ruta más corta desde el vértice ${startVertex} hasta el vértice ${endVertex}: ${getShortestPath(previous, endVertex)}`, 'info');
     } else {
         view.displayMessage('Por favor, ingrese vértices de inicio y fin válidos.', 'error');
     }
 });
+
+// Mostrar distancias desde un vértice dado
+document.getElementById('distances-button').addEventListener('click', async () => {
+    const startVertex = document.getElementById('distances-start-input').value.trim();
+    if (startVertex) {
+        view.clear();
+        const distances = await g.dijkstra(startVertex, (previous, currentVertex) => {
+            view.highlightVertex(currentVertex, 'dijkstra');
+        });
+
+        displayDistances(distances, startVertex);
+        view.displayMessage(`Distancias desde el vértice ${startVertex} a todos los demás vértices calculadas.`, 'info');
+    } else {
+        view.displayMessage('Por favor, ingrese un vértice de inicio válido.', 'error');
+    }
+});
+
+function updateGraphView() {
+    view.clear();
+    const vertices = g.getVertices();
+    for (let vertex of vertices) {
+        view.displayVertex(vertex);
+    }
+    const edges = g.getEdges();
+    for (let [start, end, weight] of edges) {
+        view.displayEdge(start, end, weight);
+    }
+}
 
 function updateSteps(previous, endVertex) {
     const stepsContainer = document.getElementById('steps');
@@ -125,6 +149,18 @@ function getShortestPath(previous, endVertex) {
     }
     path.unshift(currentVertex);
     return path.join(' -> ');
+}
+
+function displayDistances(distances, startVertex) {
+    const stepsContainer = document.getElementById('steps');
+    stepsContainer.innerHTML = '';
+
+    for (const vertex in distances) {
+        const distanceElement = document.createElement('p');
+        const distance = distances[vertex] === Infinity ? '∞' : distances[vertex];
+        distanceElement.textContent = `Distancia desde ${startVertex} a ${vertex}: ${distance}`;
+        stepsContainer.appendChild(distanceElement);
+    }
 }
 
 updateGraphView();

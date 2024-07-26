@@ -11,28 +11,35 @@
     
     <div>
         <h3>Agregar Vértice</h3>
-        <input type="text" id="vertex-input" placeholder="Nombre del vértice">
+        <input type="text" id="vertex-input" placeholder="Ingrese un vértice">
         <button id="add-vertex-button">Agregar Vértice</button>
     </div>
     
     <div>
         <h3>Agregar Arista</h3>
-        <input type="text" id="edge-start-input" placeholder="Vértice de inicio">
-        <input type="text" id="edge-end-input" placeholder="Vértice de fin">
+        <input type="text" id="edge-start-input" placeholder="Vértice de Inicio">
+        <input type="text" id="edge-end-input" placeholder="Vértice de Fin">
+        <input type="number" id="edge-weight-input" placeholder="Peso (opcional)">
         <button id="add-edge-button">Agregar Arista</button>
     </div>
     
     <div>
-        <h3>Recorridos</h3>
+        <h3>Iniciar Recorridos</h3>
         <button id="bfs-button">BFS</button>
         <button id="dfs-button">DFS</button>
     </div>
 
     <div>
         <h3>Algoritmo de Dijkstra</h3>
-        <input type="text" id="dijkstra-start-input" placeholder="Vértice de inicio">
-        <input type="text" id="dijkstra-end-input" placeholder="Vértice de fin">
+        <input type="text" id="dijkstra-start-input" placeholder="Vértice de Inicio">
+        <input type="text" id="dijkstra-end-input" placeholder="Vértice de Fin">
         <button id="dijkstra-button">Encontrar Ruta Más Corta</button>
+    </div>
+
+    <div>
+        <h3>Distancias desde un Vértice</h3>
+        <input type="text" id="distances-start-input" placeholder="Vértice de Inicio">
+        <button id="distances-button">Calcular Distancias</button>
     </div>
     
     <div id="steps" class="info-container"></div>

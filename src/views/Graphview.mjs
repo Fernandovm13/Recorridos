@@ -3,6 +3,10 @@ export default class GraphView {
         this.container = document.getElementById(containerId);
     }
 
+    clear() {
+        this.container.innerHTML = '';
+    }
+
     displayVertex(vertex, type = '') {
         const vertexElement = document.createElement('div');
         vertexElement.className = `vertex ${type}`;
@@ -10,30 +14,23 @@ export default class GraphView {
         this.container.appendChild(vertexElement);
     }
 
-    highlightVertex(vertex, type = '') {
-        const vertexElement = this.getVertexElement(vertex);
-        if (vertexElement) {
-            vertexElement.classList.add('highlight', type);
-            setTimeout(() => {
-                vertexElement.classList.remove('highlight', type);
-            }, 1000); // Duración del highlight (1 segundo)
-        }
+    displayEdge(start, end, weight) {
+        const edgeElement = document.createElement('div');
+        edgeElement.className = 'edge';
+        this.container.appendChild(edgeElement);
     }
 
-    getVertexElement(vertex) {
-        return Array.from(this.container.getElementsByClassName('vertex')).find(el => el.textContent === vertex);
-    }
-
-    clear() {
-        this.container.innerHTML = '';
-    }
-
-    displayMessage(message, type = 'info') {
-        const messageContainer = document.getElementById('messages');
-        const messageElement = document.createElement('p');
+    displayMessage(message, type) {
+        const messageElement = document.createElement('div');
         messageElement.className = `message ${type}`;
         messageElement.textContent = message;
-        messageContainer.innerHTML = ''; // Clear previous messages
-        messageContainer.appendChild(messageElement);
+        this.container.appendChild(messageElement);
+    }
+
+    highlightVertex(vertex, type) {
+        const vertexElement = document.createElement('div');
+        vertexElement.className = `highlight-vertex ${type}`;
+        vertexElement.textContent = vertex;
+        this.container.appendChild(vertexElement);
     }
 }
