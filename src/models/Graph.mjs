@@ -114,7 +114,7 @@ export default class Graph {
             }
         }
     
-        return previous;
+        return distances;
     }
     
     getWeight(start, end) {

@@ -81,7 +81,7 @@ document.getElementById('dfs-button').addEventListener('click', () => {
     }
 });
 
-// Agregar evento para ejecutar Dijkstra
+//Ejecutar Dijkstra
 document.getElementById('dijkstra-button').addEventListener('click', async () => {
     const startVertex = document.getElementById('dijkstra-start-input').value.trim();
     const endVertex = document.getElementById('dijkstra-end-input').value.trim();
